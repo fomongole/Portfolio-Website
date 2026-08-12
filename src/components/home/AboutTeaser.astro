@@ -1,0 +1,50 @@
+---
+import ButtonLink from '../ui/ButtonLink.astro';
+import PlaceholderFrame from '../common/PlaceholderFrame.astro';
+---
+
+<section class="about-teaser">
+	<div class="site-container about-grid">
+		<PlaceholderFrame label="Workspace image slot" aspect="5 / 4" />
+		<div class="about-copy">
+			<p class="eyebrow">About teaser</p>
+			<h2 class="text-balance">Based in Kampala, building for teams that care about the whole product.</h2>
+			<p class="muted text-pretty">
+				Fred’s work sits where product judgment meets implementation detail: shaping interfaces, services, and mobile flows that can survive real users and real constraints.
+			</p>
+			<ButtonLink href="/about/" variant="quiet">About Fred</ButtonLink>
+		</div>
+	</div>
+</section>
+
+<style>
+	.about-teaser {
+		padding-block: clamp(3rem, 7vw, 5.5rem);
+	}
+
+	.about-grid {
+		display: grid;
+		grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1fr);
+		align-items: center;
+		gap: clamp(2rem, 5vw, 4rem);
+	}
+
+	h2 {
+		margin: 0.55rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 5vw, 4rem);
+		line-height: 0.98;
+	}
+
+	.about-copy p:not(.eyebrow) {
+		max-width: 42rem;
+		margin: 1rem 0 1.3rem;
+		font-size: 1.04rem;
+	}
+
+	@media (max-width: 760px) {
+		.about-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,36 +1,38 @@
-# Astro Starter Kit: Basics
+# Engineer Fred Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+Premium personal portfolio foundation for Fred Omongole ("Engineer Fred"), built with Astro and Tailwind CSS.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Phase 1 Scope
 
-## 🚀 Project Structure
+This phase sets up the design system, architecture, site shell, homepage skeleton, project data model, placeholder media convention, and SEO scaffolding. About, Skills, full project content, project detail pages, GitHub integration, and the contact form are intentionally reserved for later phases.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Project Structure
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+│   ├── images/placeholders/
+│   └── social/
+├── src/
+│   ├── components/
+│   │   ├── common/
+│   │   ├── hero/
+│   │   ├── home/
+│   │   ├── layout/
+│   │   └── ui/
+│   ├── data/
+│   ├── layouts/
+│   ├── lib/
+│   ├── pages/
+│   └── styles/
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Deployment
 
-## 🧞 Commands
+The current Astro config assumes Vercel via `@astrojs/vercel`. Revisit `astro.config.mjs` if the deployment target changes or once the production domain is confirmed.
 
-All commands are run from the root of the project, from a terminal:
+## Commands
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
@@ -41,6 +43,8 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+Per `AGENTS.md`, use Astro background mode for local development:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```sh
+astro dev --background
+```

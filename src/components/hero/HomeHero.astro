@@ -1,0 +1,142 @@
+---
+import ButtonLink from '../ui/ButtonLink.astro';
+import PlaceholderFrame from '../common/PlaceholderFrame.astro';
+import { site } from '../../data/site';
+---
+
+<section class="hero-section">
+	<div class="site-container hero-grid">
+		<div class="hero-copy">
+			<p class="eyebrow">{site.location} · {site.experience} experience</p>
+			<h1 class="text-balance">
+				Fred designs and builds complete software products across web, backend, and mobile.
+			</h1>
+			<p class="hero-lede text-pretty">
+				A full-stack engineer for teams that need clear product thinking, durable systems, and interfaces that feel considered from the first screen to the last API edge case.
+			</p>
+			<div class="hero-actions">
+				<ButtonLink href="#selected-work">View foundation</ButtonLink>
+				<ButtonLink href={`mailto:${site.email}`} variant="secondary">Start a conversation</ButtonLink>
+			</div>
+		</div>
+		<aside class="hero-panel" aria-label="Portfolio identity preview">
+			<PlaceholderFrame label="Profile image slot" aspect="4 / 5" />
+			<div class="signal-board">
+				<div>
+					<span>Focus</span>
+					<strong>Product engineering</strong>
+				</div>
+				<div>
+					<span>Stack</span>
+					<strong>Astro · Node · Flutter</strong>
+				</div>
+			</div>
+		</aside>
+	</div>
+</section>
+
+<style>
+	.hero-section {
+		padding-block: clamp(3rem, 8vw, 7rem) clamp(3rem, 7vw, 5.5rem);
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+		align-items: end;
+		gap: clamp(2rem, 6vw, 5rem);
+	}
+
+	.hero-copy h1 {
+		max-width: 13ch;
+		margin: 0.8rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(3.35rem, 9vw, 7.65rem);
+		font-weight: 680;
+		letter-spacing: 0;
+		line-height: 0.9;
+	}
+
+	.hero-lede {
+		max-width: 42rem;
+		margin: 1.35rem 0 0;
+		color: var(--color-ink-soft);
+		font-size: clamp(1.02rem, 2vw, 1.22rem);
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.85rem;
+		margin-top: 2rem;
+	}
+
+	.hero-panel {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.signal-board {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1px;
+		overflow: hidden;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		background: var(--color-line);
+		box-shadow: var(--shadow-soft);
+	}
+
+	.signal-board div {
+		min-height: 7.25rem;
+		background: var(--color-paper-raised);
+		padding: 1rem;
+	}
+
+	.signal-board span {
+		display: block;
+		color: var(--color-ink-muted);
+		font-size: 0.72rem;
+		font-weight: 850;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.signal-board strong {
+		display: block;
+		margin-top: 1rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 3vw, 1.65rem);
+		line-height: 1;
+	}
+
+	@media (max-width: 900px) {
+		.hero-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-copy h1 {
+			max-width: 12ch;
+		}
+
+		.hero-panel {
+			grid-template-columns: minmax(12rem, 0.68fr) 1fr;
+			align-items: stretch;
+		}
+
+		.signal-board {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.hero-copy h1 {
+			font-size: clamp(3rem, 18vw, 4.4rem);
+		}
+
+		.hero-panel,
+		.signal-board {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

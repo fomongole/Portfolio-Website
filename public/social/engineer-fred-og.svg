@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Engineer Fred social preview</title>
+  <desc id="desc">Social preview placeholder for Fred Omongole's portfolio website.</desc>
+  <rect width="1200" height="630" fill="#f7f3ea"/>
+  <path d="M80 80h1040v470H80z" fill="#fffaf0" stroke="#ddd3c2" stroke-width="2"/>
+  <path d="M130 132h190v190H130z" fill="#20201d"/>
+  <text x="225" y="246" text-anchor="middle" fill="#f7f3ea" font-family="Arial, sans-serif" font-size="68" font-weight="800">EF</text>
+  <text x="374" y="214" fill="#20201d" font-family="Georgia, serif" font-size="76" font-weight="700">Engineer Fred</text>
+  <text x="378" y="286" fill="#5d5b53" font-family="Arial, sans-serif" font-size="32">Full-stack software engineer</text>
+  <text x="130" y="466" fill="#a85f43" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="3">WEB · BACKEND · MOBILE · KAMPALA</text>
+</svg>

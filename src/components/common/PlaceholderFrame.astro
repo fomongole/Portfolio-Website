@@ -1,0 +1,46 @@
+---
+interface Props {
+	label?: string;
+	aspect?: string;
+}
+
+const { label = 'Image reserved', aspect = '16 / 10' } = Astro.props;
+---
+
+<div class="placeholder-frame" style={`aspect-ratio: ${aspect}`}>
+	<div>
+		<span>{label}</span>
+	</div>
+</div>
+
+<style>
+	.placeholder-frame {
+		display: grid;
+		width: 100%;
+		overflow: hidden;
+		place-items: center;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		background:
+			linear-gradient(135deg, rgb(47 91 85 / 0.16), transparent 38%),
+			linear-gradient(315deg, rgb(168 95 67 / 0.13), transparent 34%),
+			var(--color-paper-raised);
+		color: var(--color-ink-muted);
+	}
+
+	.placeholder-frame > div {
+		display: grid;
+		width: calc(100% - 2rem);
+		height: calc(100% - 2rem);
+		place-items: center;
+		border: 1px dashed color-mix(in srgb, var(--color-line), var(--color-ink-muted) 20%);
+		border-radius: var(--radius-sm);
+	}
+
+	.placeholder-frame span {
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+</style>

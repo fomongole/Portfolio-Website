@@ -1,0 +1,65 @@
+---
+import { site } from '../../data/site';
+import ButtonLink from '../ui/ButtonLink.astro';
+---
+
+<section class="contact-cta">
+	<div class="site-container cta-shell">
+		<div>
+			<p class="eyebrow">Contact</p>
+			<h2 class="text-balance">Have a product that needs steady engineering hands?</h2>
+		</div>
+		<div class="cta-copy">
+			<p class="muted">
+				Send a note about the product, the team, and the outcome you need to move toward next.
+			</p>
+			<ButtonLink href={`mailto:${site.email}`}>Email Fred</ButtonLink>
+		</div>
+	</div>
+</section>
+
+<style>
+	.contact-cta {
+		padding-block: clamp(3rem, 7vw, 5.5rem);
+		border-top: 1px solid var(--color-line);
+	}
+
+	.cta-shell {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.44fr);
+		gap: 2rem;
+		align-items: end;
+		border-radius: var(--radius-md);
+		background: var(--color-ink);
+		color: var(--color-paper);
+		padding: clamp(1.25rem, 5vw, 3rem);
+	}
+
+	.cta-shell .eyebrow {
+		color: var(--color-clay);
+	}
+
+	h2 {
+		max-width: 13ch;
+		margin: 0.7rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(2.4rem, 6vw, 5.3rem);
+		line-height: 0.92;
+	}
+
+	.cta-copy {
+		display: grid;
+		gap: 1rem;
+		justify-items: start;
+	}
+
+	.cta-copy p {
+		color: color-mix(in srgb, var(--color-paper), transparent 18%);
+	}
+
+	@media (max-width: 760px) {
+		.cta-shell {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

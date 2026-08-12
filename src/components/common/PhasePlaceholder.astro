@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ButtonLink from '../ui/ButtonLink.astro';
+
+interface Props {
+	title: string;
+	eyebrow: string;
+	description: string;
+}
+
+const { title, eyebrow, description } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+	<section class="placeholder-page">
+		<div class="site-container placeholder-shell">
+			<p class="eyebrow">{eyebrow}</p>
+			<h1 class="text-balance">{title}</h1>
+			<p class="muted text-pretty">{description}</p>
+			<ButtonLink href="/" variant="secondary">Back home</ButtonLink>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.placeholder-page {
+		min-height: 64vh;
+		padding-block: clamp(4rem, 10vw, 8rem);
+	}
+
+	.placeholder-shell {
+		display: grid;
+		gap: 1rem;
+		max-width: 46rem;
+	}
+
+	h1 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(3rem, 8vw, 6.5rem);
+		line-height: 0.92;
+	}
+
+	p:not(.eyebrow) {
+		font-size: 1.08rem;
+	}
+</style>

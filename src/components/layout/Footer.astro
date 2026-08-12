@@ -1,0 +1,66 @@
+---
+import { site, socials } from '../../data/site';
+---
+
+<footer class="site-footer">
+	<div class="site-container footer-grid">
+		<div>
+			<p class="eyebrow">Available for thoughtful product work</p>
+			<h2>{site.personName}</h2>
+			<p class="muted">Full-stack engineering from Kampala: web, backend, and mobile products built with care.</p>
+		</div>
+		<div class="footer-links">
+			<a href={`mailto:${site.email}`}>{site.email}</a>
+			<a href={`tel:${site.phone}`}>{site.phone}</a>
+			{socials.map((social) => <a href={social.href} target="_blank" rel="noreferrer">{social.label}</a>)}
+		</div>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		border-top: 1px solid var(--color-line);
+		background: var(--color-paper-raised);
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 1.2fr 0.8fr;
+		gap: 2rem;
+		padding-block: clamp(2rem, 6vw, 4rem);
+	}
+
+	h2 {
+		margin: 0.5rem 0;
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 4vw, 3rem);
+		line-height: 1;
+	}
+
+	.footer-links {
+		display: grid;
+		gap: 0.6rem;
+		align-content: start;
+		justify-items: end;
+		font-weight: 750;
+	}
+
+	.footer-links a {
+		color: var(--color-ink-soft);
+		text-decoration: none;
+	}
+
+	.footer-links a:hover {
+		color: var(--color-accent-strong);
+	}
+
+	@media (max-width: 760px) {
+		.footer-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.footer-links {
+			justify-items: start;
+		}
+	}
+</style>

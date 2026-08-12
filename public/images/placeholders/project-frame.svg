@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Project screenshot placeholder</title>
+  <desc id="desc">A reserved frame for future portfolio project imagery.</desc>
+  <rect width="1600" height="1000" fill="#fffaf0"/>
+  <path d="M0 0h1600v1000H0z" fill="#2f5b55" opacity=".08"/>
+  <path d="M160 160h1280v680H160z" fill="none" stroke="#a85f43" stroke-width="4" stroke-dasharray="18 18" opacity=".55"/>
+  <path d="M240 260h560v44H240zm0 92h900v28H240zm0 64h760v28H240zm0 200h1120v2H240z" fill="#20201d" opacity=".18"/>
+</svg>
