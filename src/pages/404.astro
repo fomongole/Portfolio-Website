@@ -1,0 +1,196 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ButtonLink from '../components/ui/ButtonLink.astro';
+import { navItems } from '../data/site';
+---
+
+<Layout
+	title="Page not found"
+	description="The page you're looking for doesn't exist or may have been moved."
+>
+	<section class="not-found">
+		<div class="site-container not-found-inner">
+			<div class="not-found-graphic" aria-hidden="true">
+				<span class="digit digit--4a">4</span>
+				<span class="digit digit--0">0</span>
+				<span class="digit digit--4b">4</span>
+			</div>
+
+			<h1 class="not-found-heading">Page not found</h1>
+			<p class="not-found-body">
+				The page you're looking for doesn't exist, was removed, or may have been moved to a new address.
+			</p>
+
+			<div class="not-found-actions">
+				<ButtonLink href="/">Go back home</ButtonLink>
+				<ButtonLink href="/work/" variant="secondary">View my work</ButtonLink>
+			</div>
+
+			<nav class="not-found-nav" aria-label="Site pages">
+				<p class="not-found-nav-label">Or try one of these:</p>
+				<ul class="not-found-links">
+					{navItems.map((item) => (
+						<li><a href={item.href}>{item.label}</a></li>
+					))}
+				</ul>
+			</nav>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.not-found {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: calc(100vh - 160px);
+		padding-block: 4rem;
+		text-align: center;
+	}
+
+	.not-found-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		max-width: 540px;
+	}
+
+	/* ── Animated 404 graphic ── */
+	.not-found-graphic {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.15em;
+		font-family: var(--font-display);
+		font-size: clamp(6rem, 18vw, 12rem);
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: -0.04em;
+		color: var(--color-accent-strong);
+		user-select: none;
+		margin-bottom: 0.25rem;
+	}
+
+	.digit {
+		display: inline-block;
+		animation: float 4s ease-in-out infinite;
+		position: relative;
+	}
+
+	.digit--4a {
+		animation-delay: 0s;
+	}
+
+	.digit--0 {
+		animation-delay: 0.4s;
+		color: var(--color-clay);
+		text-shadow: 0 0 40px rgb(168 95 67 / 0.2);
+	}
+
+	.digit--4b {
+		animation-delay: 0.8s;
+	}
+
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-12px);
+		}
+	}
+
+	/* ── Content ── */
+	.not-found-heading {
+		font-family: var(--font-display);
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		font-weight: 700;
+		color: var(--color-ink);
+		margin: 0;
+	}
+
+	.not-found-body {
+		font-family: var(--font-sans);
+		font-size: 1.05rem;
+		line-height: 1.6;
+		color: var(--color-ink-soft);
+		margin: 0;
+		max-width: 420px;
+		text-wrap: pretty;
+	}
+
+	/* ── Actions ── */
+	.not-found-actions {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin-top: 0.75rem;
+	}
+
+	/* ── Nav links ── */
+	.not-found-nav {
+		margin-top: 2rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-line);
+		width: 100%;
+	}
+
+	.not-found-nav-label {
+		font-family: var(--font-sans);
+		font-size: 0.82rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-ink-muted);
+		margin: 0 0 1rem;
+	}
+
+	.not-found-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: center;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.not-found-links a {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.5rem 1rem;
+		font-family: var(--font-sans);
+		font-size: 0.88rem;
+		font-weight: 600;
+		color: var(--color-ink);
+		text-decoration: none;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-sm);
+		background: var(--color-paper-raised);
+		transition:
+			border-color var(--duration-fast) var(--ease-out),
+			background-color var(--duration-fast) var(--ease-out),
+			color var(--duration-fast) var(--ease-out),
+			transform var(--duration-fast) var(--ease-out);
+	}
+
+	.not-found-links a:hover {
+		border-color: var(--color-accent);
+		color: var(--color-accent-strong);
+		transform: translateY(-1px);
+	}
+
+	@media (max-width: 480px) {
+		.not-found-actions {
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.not-found-actions :global(.button-link) {
+			width: 100%;
+		}
+	}
+</style>
