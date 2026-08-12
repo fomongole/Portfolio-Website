@@ -58,6 +58,15 @@ const isPlaceholder = (href: string) => href.startsWith('[');
 		border-radius: var(--radius-md);
 		background: var(--color-paper-raised);
 		box-shadow: var(--shadow-soft);
+		transition:
+			border-color var(--duration-base) var(--ease-out),
+			box-shadow var(--duration-base) var(--ease-out),
+			transform var(--duration-base) var(--ease-out);
+	}
+
+	.project-card:hover {
+		border-color: color-mix(in srgb, var(--color-accent), var(--color-line) 42%);
+		box-shadow: 0 26px 80px rgb(var(--color-shadow) / 0.14);
 	}
 
 	.project-card--featured {

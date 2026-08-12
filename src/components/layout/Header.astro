@@ -20,7 +20,6 @@ const githubLinks = socials.filter((social) => social.href.includes('github.com'
 					<a href={social.href} target="_blank" rel="noreferrer">{social.shortLabel}</a>
 				))}
 			</div>
-			<a class="resume-link" href="/resume.pdf">CV</a>
 			<ThemeToggle />
 		</div>
 	</nav>
@@ -34,6 +33,9 @@ const githubLinks = socials.filter((social) => social.href.includes('github.com'
 		border-bottom: 1px solid color-mix(in srgb, var(--color-line), transparent 22%);
 		background: color-mix(in srgb, var(--color-paper), transparent 8%);
 		backdrop-filter: blur(16px);
+		transition:
+			background-color var(--duration-base) var(--ease-out),
+			border-color var(--duration-base) var(--ease-out);
 	}
 
 	.nav-shell {
@@ -79,14 +81,12 @@ const githubLinks = socials.filter((social) => social.href.includes('github.com'
 		font-weight: 800;
 	}
 
-	.nav-links a,
-	.resume-link {
+	.nav-links a {
 		color: var(--color-ink-soft);
 		text-decoration: none;
 	}
 
-	.nav-links a:hover,
-	.resume-link:hover {
+	.nav-links a:hover {
 		color: var(--color-ink);
 	}
 
@@ -115,18 +115,6 @@ const githubLinks = socials.filter((social) => social.href.includes('github.com'
 
 	.github-actions a:hover {
 		color: var(--color-ink);
-	}
-
-	.resume-link {
-		display: inline-grid;
-		min-width: 2.45rem;
-		height: 2.45rem;
-		place-items: center;
-		border: 1px solid var(--color-line);
-		border-radius: 999px;
-		background: var(--color-paper-raised);
-		font-size: 0.76rem;
-		font-weight: 900;
 	}
 
 	@media (max-width: 760px) {

@@ -7,8 +7,8 @@ interface Props {
 const { label = 'Image reserved', aspect = '16 / 10' } = Astro.props;
 ---
 
-<div class="placeholder-frame" style={`aspect-ratio: ${aspect}`}>
-	<div>
+<div class="placeholder-frame" style={`aspect-ratio: ${aspect}`} role="img" aria-label={label}>
+	<div aria-hidden="true">
 		<span>{label}</span>
 	</div>
 </div>
@@ -26,6 +26,13 @@ const { label = 'Image reserved', aspect = '16 / 10' } = Astro.props;
 			linear-gradient(315deg, rgb(168 95 67 / 0.13), transparent 34%),
 			var(--color-paper-raised);
 		color: var(--color-ink-muted);
+		transition:
+			border-color var(--duration-base) var(--ease-out),
+			transform var(--duration-base) var(--ease-out);
+	}
+
+	.placeholder-frame:hover {
+		border-color: color-mix(in srgb, var(--color-accent), var(--color-line) 48%);
 	}
 
 	.placeholder-frame > div {

@@ -4,7 +4,7 @@
 	color-scheme: light;
 	--color-ink: #20201d;
 	--color-ink-soft: #5d5b53;
-	--color-ink-muted: #7a776d;
+	--color-ink-muted: #706c61;
 	--color-paper: #f7f3ea;
 	--color-paper-raised: #fffaf0;
 	--color-line: #ddd3c2;
@@ -23,6 +23,9 @@
 	--radius-md: 8px;
 	--shadow-soft: 0 22px 70px rgb(var(--color-shadow) / 0.1);
 	--shadow-line: inset 0 0 0 1px var(--color-line);
+	--duration-fast: 160ms;
+	--duration-base: 240ms;
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root[data-theme="dark"] {
@@ -64,6 +67,11 @@ html {
 		scroll-behavior: auto !important;
 		transition-duration: 0.01ms !important;
 	}
+
+	.reveal {
+		opacity: 1 !important;
+		transform: none !important;
+	}
 }
 
 body {
@@ -92,6 +100,15 @@ a {
 	color: inherit;
 	text-decoration-thickness: 0.08em;
 	text-underline-offset: 0.22em;
+}
+
+a,
+button {
+	transition:
+		background-color var(--duration-fast) var(--ease-out),
+		border-color var(--duration-fast) var(--ease-out),
+		color var(--duration-fast) var(--ease-out),
+		transform var(--duration-fast) var(--ease-out);
 }
 
 button,
@@ -134,4 +151,25 @@ select {
 
 .muted {
 	color: var(--color-ink-soft);
+}
+
+.reveal {
+	opacity: 0;
+	transform: translateY(14px);
+	transition:
+		opacity 520ms var(--ease-out),
+		transform 520ms var(--ease-out);
+}
+
+.reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (hover: hover) {
+	.project-card:hover,
+	.method:hover,
+	.placeholder-frame:hover {
+		transform: translateY(-2px);
+	}
 }
