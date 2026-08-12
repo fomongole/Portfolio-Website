@@ -66,6 +66,7 @@ export const projects: Project[] = [
 		links: {
 			playStore: '[PLAY_STORE_URL]',
 			appStore: '[APP_STORE_URL]',
+			live: 'https://bllar.com',
 		},
 		ownership: 'client',
 		ownershipLabel: 'Client project · Deepcode Innovations',
@@ -96,6 +97,7 @@ export const projects: Project[] = [
 		images: [{ ...placeholderProjectImage, alt: 'Afrodoctor product screenshot', assetPath: '/src/assets/images/projects/afrodoctor.jpg' }],
 		links: {
 			playStore: '[PLAY_STORE_URL]',
+			live: 'https://afrodoctor.org',
 		},
 		ownership: 'employer',
 		ownershipLabel: 'Employer project',
@@ -129,7 +131,9 @@ export const projects: Project[] = [
 		technologies: ['Flutter', 'Google Play', 'App Store'],
 		role: 'Bug fixes and Play Store release prep',
 		images: [{ ...placeholderProjectImage, alt: 'Educan app screenshot', assetPath: '/src/assets/images/projects/educan.jpg' }],
-		links: {},
+		links: {
+			live: 'https://educanug.org',
+		},
 		ownership: 'client',
 		ownershipLabel: 'Client project',
 		featured: false,
@@ -194,7 +198,9 @@ export const projects: Project[] = [
 		technologies: ['Kotlin'],
 		role: 'Personal product engineering',
 		images: [{ ...placeholderProjectImage, alt: 'WhatsApp Status Saver app screenshot', assetPath: '/src/assets/images/projects/whatsapp-status-saver.jpg' }],
-		links: {},
+		links: {
+			live: 'https://github.com/EngFred/WA_Status_Saver'
+		},
 		ownership: 'personal',
 		ownershipLabel: 'Personal project',
 		featured: false,
