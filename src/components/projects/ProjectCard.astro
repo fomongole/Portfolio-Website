@@ -27,7 +27,7 @@ const isPlaceholder = (href: string) => href.startsWith('[');
 			<span>{project.categoryLabel}</span>
 			<span>{project.ownershipLabel}</span>
 		</div>
-		<h3>{project.title}</h3>
+		<h3><a href={`/work/${project.slug}/`}>{project.title}</a></h3>
 		<p class="project-description">{project.description}</p>
 		<p class="project-role"><strong>Role:</strong> {project.role}</p>
 		{project.notes && (
@@ -38,17 +38,16 @@ const isPlaceholder = (href: string) => href.startsWith('[');
 		<div class="tech-row" aria-label={`${project.title} technologies`}>
 			{project.technologies.map((tech) => <span>{tech}</span>)}
 		</div>
-		{links.length > 0 && (
-			<div class="project-links" aria-label={`${project.title} links`}>
-				{links.map((link) =>
-					isPlaceholder(link.href) ? (
-						<span class="link-placeholder">{link.label}: {link.href}</span>
-					) : (
-						<a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
-					)
-				)}
-			</div>
-		)}
+		<div class="project-links" aria-label={`${project.title} links`}>
+			<a href={`/work/${project.slug}/`}>View details</a>
+			{links.map((link) =>
+				isPlaceholder(link.href) ? (
+					<span class="link-placeholder">{link.label}: {link.href}</span>
+				) : (
+					<a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+				)
+			)}
+		</div>
 	</div>
 </article>
 
@@ -124,6 +123,14 @@ const isPlaceholder = (href: string) => href.startsWith('[');
 		font-family: var(--font-display);
 		font-size: clamp(1.65rem, 4vw, 3rem);
 		line-height: 0.98;
+	}
+
+	h3 a {
+		text-decoration: none;
+	}
+
+	h3 a:hover {
+		color: var(--color-accent-strong);
 	}
 
 	.project-card--compact h3 {

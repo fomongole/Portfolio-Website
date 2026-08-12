@@ -1,9 +1,11 @@
 ---
-import PhasePlaceholder from '../components/common/PhasePlaceholder.astro';
+import ContactContent from '../components/contact/ContactContent.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<PhasePlaceholder
-	eyebrow="Phase 3"
-	title="Contact"
-	description="The full contact page and form will arrive later. Fred's email and phone are already available in the footer."
-/>
+<Layout
+	title="Contact Fred"
+	description="Contact Fred Omongole for freelance web, mobile, backend, product engineering, and existing application improvement work."
+>
+	<ContactContent />
+</Layout>

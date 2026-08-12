@@ -21,7 +21,13 @@ export const navItems = [
 ];
 
 export const socials = [
-	{ label: 'GitHub: fomongole', href: 'https://github.com/fomongole' },
-	{ label: 'GitHub: EngFred', href: 'https://github.com/EngFred' },
+	{ label: 'GitHub: fomongole', shortLabel: 'Web/backend GitHub', href: 'https://github.com/fomongole' },
+	{ label: 'GitHub: EngFred', shortLabel: 'Mobile GitHub', href: 'https://github.com/EngFred' },
 	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/fred-omongole-a5943b2b0/' },
 ];
+
+export const availability = {
+	headline: 'Available for freelance product, web, mobile, backend, and app improvement work.',
+	description:
+		'Fred is a good fit when you need a working engineer to move an existing product forward, stabilize an app, build a focused product surface, or connect mobile, backend, and web pieces into one coherent system.',
+};

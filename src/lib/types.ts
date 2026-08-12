@@ -20,6 +20,7 @@ export interface Project {
 	title: string;
 	slug: string;
 	description: string;
+	intro?: string;
 	category: ProjectCategory;
 	categoryLabel: string;
 	platform: string[];
@@ -33,4 +34,8 @@ export interface Project {
 	year?: number;
 	type: ProjectType;
 	notes?: string[];
+	problem?: string;
+	solution?: string;
+	features?: string[];
+	architecture?: string[];
 }

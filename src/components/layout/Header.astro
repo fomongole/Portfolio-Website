@@ -1,6 +1,8 @@
 ---
-import { navItems, site } from '../../data/site';
+import { navItems, site, socials } from '../../data/site';
 import ThemeToggle from './ThemeToggle.astro';
+
+const githubLinks = socials.filter((social) => social.href.includes('github.com'));
 ---
 
 <header class="site-header">
@@ -13,6 +15,11 @@ import ThemeToggle from './ThemeToggle.astro';
 			{navItems.map((item) => <a href={item.href}>{item.label}</a>)}
 		</div>
 		<div class="nav-actions">
+			<div class="github-actions" aria-label="GitHub profiles">
+				{githubLinks.map((social) => (
+					<a href={social.href} target="_blank" rel="noreferrer">{social.shortLabel}</a>
+				))}
+			</div>
 			<a class="resume-link" href="/resume.pdf">CV</a>
 			<ThemeToggle />
 		</div>
@@ -88,6 +95,28 @@ import ThemeToggle from './ThemeToggle.astro';
 		gap: 0.8rem;
 	}
 
+	.github-actions {
+		display: flex;
+		gap: 0.45rem;
+	}
+
+	.github-actions a {
+		border: 1px solid var(--color-line);
+		border-radius: 999px;
+		background: var(--color-paper-raised);
+		padding: 0.48rem 0.62rem;
+		color: var(--color-ink-soft);
+		font-size: 0.72rem;
+		font-weight: 850;
+		line-height: 1;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.github-actions a:hover {
+		color: var(--color-ink);
+	}
+
 	.resume-link {
 		display: inline-grid;
 		min-width: 2.45rem;
@@ -113,6 +142,16 @@ import ThemeToggle from './ThemeToggle.astro';
 		}
 
 		.brand strong {
+			display: none;
+		}
+
+		.github-actions {
+			display: none;
+		}
+	}
+
+	@media (max-width: 1120px) {
+		.github-actions {
 			display: none;
 		}
 	}

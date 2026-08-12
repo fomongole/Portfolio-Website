@@ -1,0 +1,303 @@
+---
+import type { Project } from '../../lib/types';
+import { getRelatedProjects } from '../../data/projects';
+import PlaceholderFrame from '../common/PlaceholderFrame.astro';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+const relatedProjects = getRelatedProjects(project);
+const links = [
+	{ label: 'Live product', href: project.links.live },
+	{ label: 'GitHub repository', href: project.links.github },
+	{ label: 'Play Store', href: project.links.playStore },
+	{ label: 'App Store', href: project.links.appStore },
+].filter((link) => link.href && !link.href.startsWith('['));
+---
+
+<article class="detail-page">
+	<div class="site-container detail-stack">
+		<a class="back-link" href="/work/">Back to work</a>
+		<header class="detail-hero">
+			<div>
+				<p class="eyebrow">{project.categoryLabel} · {project.ownershipLabel}</p>
+				<h1 class="text-balance">{project.title}</h1>
+				<p class="muted text-pretty">{project.intro || project.description}</p>
+			</div>
+			<aside class="meta-panel" aria-label={`${project.title} project metadata`}>
+				<div>
+					<span>Type</span>
+					<strong>{project.type}</strong>
+				</div>
+				<div>
+					<span>Role</span>
+					<strong>{project.role}</strong>
+				</div>
+				{project.year && (
+					<div>
+						<span>Year</span>
+						<strong>{project.year}</strong>
+					</div>
+				)}
+			</aside>
+		</header>
+
+		<PlaceholderFrame label="[PROJECT_SCREENSHOT]" aspect="16 / 9" />
+
+		<section class="content-grid">
+			<div class="narrative">
+				{project.problem && (
+					<section>
+						<p class="eyebrow">Problem</p>
+						<p>{project.problem}</p>
+					</section>
+				)}
+				{project.solution && (
+					<section>
+						<p class="eyebrow">Solution</p>
+						<p>{project.solution}</p>
+					</section>
+				)}
+				{project.features && (
+					<section>
+						<p class="eyebrow">Product surface</p>
+						<ul class="feature-list">
+							{project.features.map((feature) => <li>{feature}</li>)}
+						</ul>
+					</section>
+				)}
+				{project.architecture && (
+					<section>
+						<p class="eyebrow">Architecture notes</p>
+						<ul class="feature-list">
+							{project.architecture.map((note) => <li>{note}</li>)}
+						</ul>
+					</section>
+				)}
+			</div>
+
+			<aside class="side-panel">
+				<div>
+					<p class="eyebrow">Technologies</p>
+					<div class="tech-row">
+						{project.technologies.map((tech) => <span>{tech}</span>)}
+					</div>
+				</div>
+				{project.notes && (
+					<div>
+						<p class="eyebrow">Notes</p>
+						<ul>
+							{project.notes.map((note) => <li>{note}</li>)}
+						</ul>
+					</div>
+				)}
+				{links.length > 0 && (
+					<div>
+						<p class="eyebrow">Links</p>
+						<div class="detail-links">
+							{links.map((link) => <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>)}
+						</div>
+					</div>
+				)}
+			</aside>
+		</section>
+
+		{relatedProjects.length > 0 && (
+			<section class="related-section">
+				<header>
+					<p class="eyebrow">Related projects</p>
+					<h2>More work in this orbit.</h2>
+				</header>
+				<div class="related-grid">
+					{relatedProjects.map((relatedProject) => <ProjectCard project={relatedProject} />)}
+				</div>
+			</section>
+		)}
+	</div>
+</article>
+
+<style>
+	.detail-page {
+		padding-block: clamp(3rem, 8vw, 6.5rem);
+	}
+
+	.detail-stack {
+		display: grid;
+		gap: clamp(1.5rem, 5vw, 3.5rem);
+	}
+
+	.back-link {
+		width: max-content;
+		color: var(--color-accent-strong);
+		font-size: 0.86rem;
+		font-weight: 850;
+		text-decoration: none;
+	}
+
+	.back-link:hover {
+		border-bottom: 1px solid currentColor;
+	}
+
+	.detail-hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.36fr);
+		gap: 2rem;
+		align-items: end;
+	}
+
+	h1 {
+		max-width: 13ch;
+		margin: 0.75rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(3.2rem, 8vw, 6.75rem);
+		line-height: 0.9;
+	}
+
+	.detail-hero p:not(.eyebrow) {
+		max-width: 46rem;
+		margin: 1.2rem 0 0;
+		font-size: 1.08rem;
+	}
+
+	.meta-panel {
+		display: grid;
+		gap: 1px;
+		overflow: hidden;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		background: var(--color-line);
+	}
+
+	.meta-panel div,
+	.side-panel,
+	.narrative section {
+		background: var(--color-paper-raised);
+	}
+
+	.meta-panel div {
+		padding: 1rem;
+	}
+
+	.meta-panel span {
+		display: block;
+		color: var(--color-clay);
+		font-size: 0.72rem;
+		font-weight: 850;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.meta-panel strong {
+		display: block;
+		margin-top: 0.35rem;
+		line-height: 1.15;
+		text-transform: capitalize;
+	}
+
+	.content-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.38fr);
+		gap: 1rem;
+		align-items: start;
+	}
+
+	.narrative {
+		display: grid;
+		gap: 1px;
+		overflow: hidden;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		background: var(--color-line);
+	}
+
+	.narrative section {
+		padding: clamp(1.2rem, 3vw, 1.75rem);
+	}
+
+	.narrative p:not(.eyebrow) {
+		margin: 0.6rem 0 0;
+		color: var(--color-ink-soft);
+		font-size: 1.04rem;
+	}
+
+	.feature-list {
+		display: grid;
+		gap: 0.55rem;
+		margin: 0.85rem 0 0;
+		padding-left: 1.1rem;
+		color: var(--color-ink-soft);
+	}
+
+	.side-panel {
+		display: grid;
+		gap: 1.25rem;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		padding: clamp(1rem, 3vw, 1.35rem);
+	}
+
+	.side-panel ul {
+		margin: 0.75rem 0 0;
+		padding-left: 1.1rem;
+		color: var(--color-ink-soft);
+	}
+
+	.tech-row,
+	.detail-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin-top: 0.75rem;
+	}
+
+	.tech-row span {
+		border: 1px solid var(--color-line);
+		border-radius: 999px;
+		background: var(--color-accent-soft);
+		padding: 0.28rem 0.55rem;
+		color: var(--color-accent-strong);
+		font-size: 0.75rem;
+		font-weight: 850;
+	}
+
+	.detail-links a {
+		color: var(--color-accent-strong);
+		font-weight: 850;
+		text-decoration: none;
+	}
+
+	.detail-links a:hover {
+		border-bottom: 1px solid currentColor;
+	}
+
+	.related-section {
+		display: grid;
+		gap: 1.25rem;
+		border-top: 1px solid var(--color-line);
+		padding-top: clamp(2rem, 5vw, 3.5rem);
+	}
+
+	.related-section h2 {
+		margin: 0.45rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 5vw, 3.75rem);
+		line-height: 0.95;
+	}
+
+	.related-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	@media (max-width: 900px) {
+		.detail-hero,
+		.content-grid,
+		.related-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
