@@ -1,6 +1,6 @@
 ---
 import type { Project } from '../../lib/types';
-import PlaceholderFrame from '../common/PlaceholderFrame.astro';
+import MediaSlot from '../common/MediaSlot.astro';
 
 interface Props {
 	project: Project;
@@ -8,19 +8,20 @@ interface Props {
 }
 
 const { project, variant = 'compact' } = Astro.props;
-const links = [
+const links: Array<{ label: string; href: string }> = [
 	{ label: 'Live', href: project.links.live },
 	{ label: 'GitHub', href: project.links.github },
 	{ label: 'Play Store', href: project.links.playStore },
 	{ label: 'App Store', href: project.links.appStore },
-].filter((link) => link.href);
+].filter((link): link is { label: string; href: string } => Boolean(link.href));
 
 const isPlaceholder = (href: string) => href.startsWith('[');
+const image = project.images[0];
 ---
 
 <article class={`project-card project-card--${variant}`}>
 	<div class="project-media">
-		<PlaceholderFrame label="[PROJECT_SCREENSHOT]" aspect="16 / 10" />
+		<MediaSlot assetPath={image?.assetPath} alt={image?.alt || `${project.title} screenshot`} label="[PROJECT_SCREENSHOT]" aspect="16 / 10" />
 	</div>
 	<div class="project-body">
 		<div class="project-kicker">

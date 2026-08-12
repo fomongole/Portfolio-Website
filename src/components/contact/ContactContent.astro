@@ -35,6 +35,11 @@ import ButtonLink from '../ui/ButtonLink.astro';
 					<strong>{site.phone}</strong>
 					<small>Good for quick coordination in Uganda</small>
 				</a>
+				<a class="method" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
+					<span>WhatsApp</span>
+					<strong>{site.phone}</strong>
+					<small>Open a direct WhatsApp chat with Fred</small>
+				</a>
 				{socials.map((social) => (
 					<a class="method" href={social.href} target="_blank" rel="noreferrer">
 						<span>{social.shortLabel || social.label}</span>

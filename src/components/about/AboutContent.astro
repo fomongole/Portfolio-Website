@@ -1,7 +1,7 @@
 ---
 import { approachPoints } from '../../data/skills';
 import { site } from '../../data/site';
-import PlaceholderFrame from '../common/PlaceholderFrame.astro';
+import MediaSlot from '../common/MediaSlot.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
 ---
 
@@ -18,7 +18,7 @@ import SectionHeader from '../ui/SectionHeader.astro';
 		</div>
 
 		<div class="about-split">
-			<PlaceholderFrame label="Profile image slot" aspect="4 / 5" />
+			<MediaSlot assetPath="/src/assets/images/profile/fred-omongole-profile.jpg" alt="Portrait of Fred Omongole" label="Profile image slot" aspect="4 / 5" />
 			<div class="story-panel">
 				<SectionHeader
 					eyebrow="Background"

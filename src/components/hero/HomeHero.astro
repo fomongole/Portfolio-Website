@@ -1,6 +1,6 @@
 ---
 import ButtonLink from '../ui/ButtonLink.astro';
-import PlaceholderFrame from '../common/PlaceholderFrame.astro';
+import MediaSlot from '../common/MediaSlot.astro';
 import { site } from '../../data/site';
 ---
 
@@ -20,7 +20,24 @@ import { site } from '../../data/site';
 			</div>
 		</div>
 		<aside class="hero-panel" aria-label="Portfolio identity preview">
-			<PlaceholderFrame label="Profile image slot" aspect="4 / 5" />
+			<div class="hero-summary">
+				<p class="eyebrow">What Fred covers</p>
+				<ul>
+					<li>
+						<span>01</span>
+						<strong>Product interfaces</strong>
+					</li>
+					<li>
+						<span>02</span>
+						<strong>Backend systems</strong>
+					</li>
+					<li>
+						<span>03</span>
+						<strong>Flutter and Android apps</strong>
+					</li>
+				</ul>
+			</div>
+			<MediaSlot assetPath="/src/assets/images/profile/fred-omongole-profile.jpg" alt="Portrait of Fred Omongole" label="Profile image slot" aspect="4 / 5" priority />
 			<div class="signal-board">
 				<div>
 					<span>Focus</span>
@@ -74,6 +91,46 @@ import { site } from '../../data/site';
 	.hero-panel {
 		display: grid;
 		gap: 1rem;
+	}
+
+	.hero-summary {
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		background: var(--color-paper-raised);
+		padding: clamp(1rem, 2vw, 1.25rem);
+		box-shadow: var(--shadow-soft);
+	}
+
+	.hero-summary ul {
+		display: grid;
+		gap: 0.85rem;
+		margin: 1rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.hero-summary li {
+		display: grid;
+		grid-template-columns: 2.25rem 1fr;
+		gap: 0.75rem;
+		align-items: baseline;
+	}
+
+	.hero-summary li + li {
+		border-top: 1px solid var(--color-line);
+		padding-top: 0.85rem;
+	}
+
+	.hero-summary span {
+		color: var(--color-clay);
+		font-size: 0.76rem;
+		font-weight: 900;
+	}
+
+	.hero-summary strong {
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 2vw, 1.55rem);
+		line-height: 1;
 	}
 
 	.signal-board {

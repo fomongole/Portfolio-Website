@@ -7,6 +7,7 @@ export interface ProjectImage {
 	alt: string;
 	width: number;
 	height: number;
+	assetPath?: string;
 }
 
 export interface ProjectLinks {

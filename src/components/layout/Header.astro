@@ -3,16 +3,27 @@ import { navItems, site, socials } from '../../data/site';
 import ThemeToggle from './ThemeToggle.astro';
 
 const githubLinks = socials.filter((social) => social.href.includes('github.com'));
+const currentPath = Astro.url.pathname;
+const normalizePath = (path: string) => (path === '/' ? '/' : path.replace(/\/$/, ''));
+const isCurrent = (href: string) => {
+	const normalizedHref = normalizePath(href);
+	const normalizedCurrent = normalizePath(currentPath);
+	return normalizedHref === '/'
+		? normalizedCurrent === '/'
+		: normalizedCurrent === normalizedHref || normalizedCurrent.startsWith(`${normalizedHref}/`);
+};
 ---
 
 <header class="site-header">
 	<nav class="site-container nav-shell" aria-label="Primary navigation">
-		<a class="brand" href="/" aria-label={`${site.name} home`}>
+		<a class="brand" href="/" aria-label={`${site.name} home`} aria-current={isCurrent('/') ? 'page' : undefined}>
 			<span>EF</span>
 			<strong>{site.name}</strong>
 		</a>
 		<div class="nav-links">
-			{navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+			{navItems.map((item) => (
+				<a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+			))}
 		</div>
 		<div class="nav-actions">
 			<div class="github-actions" aria-label="GitHub profiles">
@@ -82,12 +93,37 @@ const githubLinks = socials.filter((social) => social.href.includes('github.com'
 	}
 
 	.nav-links a {
+		position: relative;
 		color: var(--color-ink-soft);
 		text-decoration: none;
 	}
 
-	.nav-links a:hover {
+	.nav-links a:hover,
+	.nav-links a[aria-current="page"] {
 		color: var(--color-ink);
+	}
+
+	.nav-links a::after {
+		position: absolute;
+		right: 0;
+		bottom: -0.48rem;
+		left: 0;
+		height: 2px;
+		border-radius: 999px;
+		background: var(--color-clay);
+		content: "";
+		opacity: 0;
+		transform: scaleX(0.25);
+		transform-origin: center;
+		transition:
+			opacity var(--duration-fast) var(--ease-out),
+			transform var(--duration-fast) var(--ease-out);
+	}
+
+	.nav-links a:hover::after,
+	.nav-links a[aria-current="page"]::after {
+		opacity: 1;
+		transform: scaleX(1);
 	}
 
 	.nav-actions {

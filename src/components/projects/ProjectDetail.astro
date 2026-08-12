@@ -1,7 +1,7 @@
 ---
 import type { Project } from '../../lib/types';
 import { getRelatedProjects } from '../../data/projects';
-import PlaceholderFrame from '../common/PlaceholderFrame.astro';
+import MediaSlot from '../common/MediaSlot.astro';
 import ProjectCard from './ProjectCard.astro';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 const { project } = Astro.props;
 const relatedProjects = getRelatedProjects(project);
+const image = project.images[0];
 const links = [
 	{ label: 'Live product', href: project.links.live },
 	{ label: 'GitHub repository', href: project.links.github },
@@ -45,7 +46,7 @@ const links = [
 			</aside>
 		</header>
 
-		<PlaceholderFrame label="[PROJECT_SCREENSHOT]" aspect="16 / 9" />
+		<MediaSlot assetPath={image?.assetPath} alt={image?.alt || `${project.title} screenshot`} label="[PROJECT_SCREENSHOT]" aspect="16 / 9" priority />
 
 		<section class="content-grid">
 			<div class="narrative">
