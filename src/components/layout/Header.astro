@@ -1,6 +1,7 @@
 ---
 import { navItems, site, socials } from '../../data/site';
 import ThemeToggle from './ThemeToggle.astro';
+import Logo from '../common/Logo.astro';
 
 const githubLinks = socials.filter((social) => social.href.includes('github.com'));
 const currentPath = Astro.url.pathname;
@@ -17,7 +18,7 @@ const isCurrent = (href: string) => {
 <header class="site-header">
 	<nav class="site-container nav-shell" aria-label="Primary navigation">
 		<a class="brand" href="/" aria-label={`${site.name} home`} aria-current={isCurrent('/') ? 'page' : undefined}>
-			<span>EF</span>
+			<Logo size={36} />
 			<strong>{site.name}</strong>
 		</a>
 		<div class="nav-links">
@@ -67,19 +68,6 @@ const isCurrent = (href: string) => {
 	.brand {
 		gap: 0.75rem;
 		text-decoration: none;
-	}
-
-	.brand span {
-		display: grid;
-		width: 2.45rem;
-		height: 2.45rem;
-		place-items: center;
-		border-radius: var(--radius-sm);
-		background: var(--color-ink);
-		color: var(--color-paper);
-		font-size: 0.8rem;
-		font-weight: 900;
-		letter-spacing: 0.08em;
 	}
 
 	.brand strong {

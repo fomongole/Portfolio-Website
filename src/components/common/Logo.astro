@@ -1,0 +1,53 @@
+---
+interface Props {
+	size?: number | string;
+	class?: string;
+}
+
+const { size = 36, class: className = '' } = Astro.props;
+---
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 0 36 36"
+	width={size}
+	height={size}
+	class={`brand-logo ${className}`}
+	aria-hidden="true"
+>
+	<rect width="36" height="36" rx="9" class="logo-badge" />
+	<!-- Architecturally integrated EF Monogram -->
+	<path
+		d="M 9.5 10.5 H 26.5 M 9.5 10.5 V 25.5 H 18.5 M 9.5 18 H 25.5 M 18.5 10.5 V 25.5"
+		stroke-width="2.75"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		class="logo-mark"
+	/>
+</svg>
+
+<style>
+	.brand-logo {
+		display: block;
+		flex-shrink: 0;
+	}
+
+	.logo-badge {
+		fill: var(--color-ink);
+		transition: fill var(--duration-base) var(--ease-out);
+	}
+
+	.logo-mark {
+		stroke: var(--color-paper);
+		fill: none;
+		transition: stroke var(--duration-base) var(--ease-out);
+	}
+
+	:root[data-theme="dark"] .logo-badge {
+		fill: var(--color-paper-raised);
+	}
+
+	:root[data-theme="dark"] .logo-mark {
+		stroke: var(--color-ink);
+	}
+</style>
