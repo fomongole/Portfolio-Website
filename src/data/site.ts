@@ -7,9 +7,9 @@ export const site = {
 	email: 'engfred88@gmail.com',
 	phone: '0754348118',
 	whatsapp: '256754348118',
-	url: 'https://engineerfred.dev',
+	url: 'https://engineerfred-dev.vercel.app',
 	description:
-		'Fred Omongole designs and builds complete software products across web, backend, and mobile systems.',
+		'Fred Omongole (Engineer Fred) is a full-stack software engineer in Kampala, Uganda. He designs and builds complete software products across web, backend, and mobile systems.',
 	ogImage: '/social/engineer-fred-og.svg',
 };
 
