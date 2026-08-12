@@ -1,9 +1,11 @@
 ---
-import PhasePlaceholder from '../components/common/PhasePlaceholder.astro';
+import SkillsContent from '../components/skills/SkillsContent.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<PhasePlaceholder
-	eyebrow="Phase 2"
-	title="Skills"
-	description="A fuller skills system will connect Fred's stack to product outcomes and project evidence."
-/>
+<Layout
+	title="Skills and Technology"
+	description="Fred Omongole's web, backend, and mobile technology capabilities across JavaScript, TypeScript, React, Next.js, Astro, Node.js, NestJS, FastAPI, PostgreSQL, Flutter, Kotlin, and Jetpack Compose."
+>
+	<SkillsContent />
+</Layout>

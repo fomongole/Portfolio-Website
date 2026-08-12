@@ -2,9 +2,9 @@
 
 Premium personal portfolio foundation for Fred Omongole ("Engineer Fred"), built with Astro and Tailwind CSS.
 
-## Phase 1 Scope
+## Current Scope
 
-This phase sets up the design system, architecture, site shell, homepage skeleton, project data model, placeholder media convention, and SEO scaffolding. About, Skills, full project content, project detail pages, GitHub integration, and the contact form are intentionally reserved for later phases.
+The site now includes the design system, architecture, site shell, homepage, About page, Skills page, Projects listing, project data model, placeholder media convention, and SEO scaffolding. Project detail pages, GitHub integration, and the full contact/freelance experience are intentionally reserved for later phases.
 
 ## Project Structure
 

@@ -1,5 +1,5 @@
 export type ProjectCategory = 'web' | 'mobile' | 'backend' | 'full-stack';
-export type ProjectOwnership = 'client' | 'personal';
+export type ProjectOwnership = 'client' | 'employer' | 'team' | 'personal';
 export type ProjectType = 'production' | 'case-study' | 'prototype' | 'internal-tool';
 
 export interface ProjectImage {
@@ -21,13 +21,16 @@ export interface Project {
 	slug: string;
 	description: string;
 	category: ProjectCategory;
+	categoryLabel: string;
 	platform: string[];
 	technologies: string[];
 	role: string;
 	images: ProjectImage[];
 	links: ProjectLinks;
 	ownership: ProjectOwnership;
+	ownershipLabel: string;
 	featured: boolean;
-	year: number;
+	year?: number;
 	type: ProjectType;
+	notes?: string[];
 }

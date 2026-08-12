@@ -1,0 +1,142 @@
+---
+import { approachPoints } from '../../data/skills';
+import { site } from '../../data/site';
+import PlaceholderFrame from '../common/PlaceholderFrame.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+---
+
+<section class="about-page">
+	<div class="site-container about-stack">
+		<div class="about-hero">
+			<div>
+				<p class="eyebrow">{site.location} · {site.experience} experience</p>
+				<h1 class="text-balance">Fred builds the parts of a product that need to agree with each other.</h1>
+			</div>
+			<p class="muted text-pretty">
+				He works across web, backend, and mobile, with a practical bias toward shipping complete product systems rather than isolated screens or technology demos.
+			</p>
+		</div>
+
+		<div class="about-split">
+			<PlaceholderFrame label="Profile image slot" aspect="4 / 5" />
+			<div class="story-panel">
+				<SectionHeader
+					eyebrow="Background"
+					title="Full-stack engineering with mobile close at hand."
+					description="Fred Omongole is a software engineer based in Kampala, Uganda. His work spans product interfaces, backend services, mobile apps, admin dashboards, media pipelines, and release prep for client and team products."
+				/>
+				<div class="story-copy">
+					<p>
+						He has built with Next.js, React, Astro, Node.js, Express.js, NestJS, FastAPI, PostgreSQL, Flutter, Kotlin, and Jetpack Compose.
+					</p>
+					<p>
+						The through-line is not the stack itself. It is the ability to understand what the product needs, choose a maintainable shape, and carry the build across the surfaces that users and operators touch.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="approach-grid">
+			{approachPoints.map((point) => (
+				<article>
+					<h2>{point.title}</h2>
+					<p>{point.description}</p>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.about-page {
+		padding-block: clamp(3.5rem, 8vw, 7rem);
+	}
+
+	.about-stack {
+		display: grid;
+		gap: clamp(2rem, 6vw, 4.5rem);
+	}
+
+	.about-hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.44fr);
+		gap: 2rem;
+		align-items: end;
+	}
+
+	.about-hero h1 {
+		max-width: 13ch;
+		margin: 0.75rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(3.2rem, 8vw, 6.75rem);
+		line-height: 0.9;
+	}
+
+	.about-hero p:not(.eyebrow) {
+		font-size: 1.08rem;
+	}
+
+	.about-split {
+		display: grid;
+		grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1fr);
+		gap: clamp(2rem, 5vw, 4rem);
+		align-items: center;
+	}
+
+	.story-panel {
+		display: grid;
+		gap: 1.2rem;
+	}
+
+	.story-copy {
+		display: grid;
+		gap: 1rem;
+		max-width: 43rem;
+		color: var(--color-ink-soft);
+		font-size: 1.03rem;
+	}
+
+	.story-copy p {
+		margin: 0;
+	}
+
+	.approach-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1px;
+		overflow: hidden;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		background: var(--color-line);
+	}
+
+	.approach-grid article {
+		min-height: 16rem;
+		background: var(--color-paper-raised);
+		padding: clamp(1.1rem, 3vw, 1.55rem);
+	}
+
+	.approach-grid h2 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.5rem, 3vw, 2.25rem);
+		line-height: 1;
+	}
+
+	.approach-grid p {
+		margin: 0.9rem 0 0;
+		color: var(--color-ink-soft);
+	}
+
+	@media (max-width: 860px) {
+		.about-hero,
+		.about-split,
+		.approach-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.about-hero h1 {
+			max-width: 12ch;
+		}
+	}
+</style>

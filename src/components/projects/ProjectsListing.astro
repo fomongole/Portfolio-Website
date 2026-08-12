@@ -1,0 +1,105 @@
+---
+import { featuredProjects, supportingProjects } from '../../data/projects';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ProjectCard from './ProjectCard.astro';
+---
+
+<section class="projects-page">
+	<div class="site-container projects-stack">
+		<div class="projects-hero">
+			<p class="eyebrow">Work / Projects</p>
+			<h1 class="text-balance">Products Fred has helped shape across web, backend, and mobile.</h1>
+			<p class="muted text-pretty">
+				The listing separates client, employer, team, and personal work while keeping unconfirmed links and screenshots visible as placeholders for the next phase.
+			</p>
+		</div>
+
+		<div class="project-filters" aria-label="Project categories represented">
+			<span>Full-stack</span>
+			<span>Mobile</span>
+			<span>Web</span>
+			<span>Client</span>
+			<span>Personal</span>
+		</div>
+
+		<section class="featured-stack" aria-label="Featured projects">
+			<SectionHeader
+				eyebrow="Featured"
+				title="Higher-signal builds with production product surface area."
+				description="Rentora, Bllar, and Afrodoctor carry more visual weight because they best show Fred’s end-to-end and mobile delivery range."
+			/>
+			<div class="featured-list">
+				{featuredProjects.map((project) => <ProjectCard project={project} variant="featured" />)}
+			</div>
+		</section>
+
+		<section class="supporting-stack" aria-label="Additional projects">
+			<SectionHeader
+				eyebrow="Additional work"
+				title="Other shipped, team, and personal builds."
+			/>
+			<div class="supporting-grid">
+				{supportingProjects.map((project) => <ProjectCard project={project} />)}
+			</div>
+		</section>
+	</div>
+</section>
+
+<style>
+	.projects-page {
+		padding-block: clamp(3.5rem, 8vw, 7rem);
+	}
+
+	.projects-stack,
+	.featured-stack,
+	.supporting-stack,
+	.featured-list {
+		display: grid;
+		gap: 2rem;
+	}
+
+	.projects-hero {
+		max-width: 58rem;
+	}
+
+	.projects-hero h1 {
+		margin: 0.75rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(3rem, 8vw, 6.5rem);
+		line-height: 0.9;
+	}
+
+	.projects-hero p:not(.eyebrow) {
+		max-width: 44rem;
+		margin: 1.2rem 0 0;
+		font-size: 1.08rem;
+	}
+
+	.project-filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.project-filters span {
+		border: 1px solid var(--color-line);
+		border-radius: 999px;
+		background: var(--color-paper-raised);
+		padding: 0.45rem 0.72rem;
+		color: var(--color-ink-soft);
+		font-size: 0.8rem;
+		font-weight: 850;
+	}
+
+	.supporting-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	@media (max-width: 820px) {
+		.supporting-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

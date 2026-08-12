@@ -1,9 +1,11 @@
 ---
-import PhasePlaceholder from '../components/common/PhasePlaceholder.astro';
+import ProjectsListing from '../components/projects/ProjectsListing.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<PhasePlaceholder
-	eyebrow="Phase 2"
-	title="Work and projects"
-	description="Real project entries, case-study listing behavior, and GitHub integration will be added here in the project phase."
-/>
+<Layout
+	title="Work and Projects"
+	description="Explore Fred Omongole's client, employer, team, and personal product work across full-stack web and mobile builds."
+>
+	<ProjectsListing />
+</Layout>

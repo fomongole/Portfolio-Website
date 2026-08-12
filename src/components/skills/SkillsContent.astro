@@ -1,0 +1,121 @@
+---
+import { skillGroups } from '../../data/skills';
+import SectionHeader from '../ui/SectionHeader.astro';
+---
+
+<section class="skills-page">
+	<div class="site-container skills-stack">
+		<div class="skills-hero">
+			<p class="eyebrow">Skills / Technology</p>
+			<h1 class="text-balance">Capability by product surface, not a loose pile of tools.</h1>
+			<p class="muted text-pretty">
+				Fred’s stack clusters around three responsibilities: the customer-facing web layer, the backend systems behind it, and the mobile products people carry with them.
+			</p>
+		</div>
+
+		<div class="skill-grid">
+			{skillGroups.map((group) => (
+				<article>
+					<p class="eyebrow">{group.label}</p>
+					<h2>{group.summary}</h2>
+					<div class="skill-list" aria-label={`${group.label} technologies`}>
+						{group.items.map((item) => <span>{item}</span>)}
+					</div>
+				</article>
+			))}
+		</div>
+
+		<section class="systems-note">
+			<SectionHeader
+				eyebrow="How it connects"
+				title="The value is in how the pieces fit."
+				description="A rental platform needs mobile flows, admin operations, media delivery, notifications, and deployment discipline. A health or education product needs data confidence, release readiness, and user paths that do not collapse under real usage. The technology choices serve those product needs."
+			/>
+		</section>
+	</div>
+</section>
+
+<style>
+	.skills-page {
+		padding-block: clamp(3.5rem, 8vw, 7rem);
+	}
+
+	.skills-stack {
+		display: grid;
+		gap: clamp(2rem, 5vw, 4rem);
+	}
+
+	.skills-hero {
+		max-width: 58rem;
+	}
+
+	.skills-hero h1 {
+		margin: 0.75rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(3rem, 8vw, 6.5rem);
+		line-height: 0.9;
+	}
+
+	.skills-hero p:not(.eyebrow) {
+		max-width: 43rem;
+		margin: 1.2rem 0 0;
+		font-size: 1.08rem;
+	}
+
+	.skill-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1px;
+		overflow: hidden;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		background: var(--color-line);
+	}
+
+	.skill-grid article {
+		display: grid;
+		min-height: 24rem;
+		align-content: space-between;
+		gap: 2rem;
+		background: var(--color-paper-raised);
+		padding: clamp(1.1rem, 3vw, 1.55rem);
+	}
+
+	h2 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.6rem, 3vw, 2.45rem);
+		line-height: 1;
+	}
+
+	.skill-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.skill-list span {
+		border: 1px solid var(--color-line);
+		border-radius: 999px;
+		background: var(--color-accent-soft);
+		padding: 0.38rem 0.62rem;
+		color: var(--color-accent-strong);
+		font-size: 0.78rem;
+		font-weight: 850;
+	}
+
+	.systems-note {
+		border-top: 1px solid var(--color-line);
+		padding-top: clamp(2rem, 5vw, 4rem);
+	}
+
+	@media (max-width: 900px) {
+		.skill-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.skill-grid article {
+			min-height: 16rem;
+		}
+	}
+</style>

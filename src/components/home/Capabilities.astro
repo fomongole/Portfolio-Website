@@ -4,7 +4,7 @@ import { skillGroups } from '../../data/skills';
 import SectionHeader from '../ui/SectionHeader.astro';
 ---
 
-<section class="capabilities-section" aria-labelledby="capabilities-title">
+<section class="capabilities-section">
 	<div class="site-container capabilities-grid">
 		<SectionHeader
 			eyebrow="Capabilities"
@@ -22,7 +22,10 @@ import SectionHeader from '../ui/SectionHeader.astro';
 			{skillGroups.map((group) => (
 				<div>
 					<strong>{group.label}</strong>
-					<p>{group.items.join(' · ')}</p>
+					<p>{group.summary}</p>
+					<ul>
+						{group.items.map((item) => <li>{item}</li>)}
+					</ul>
 				</div>
 			))}
 		</div>
@@ -69,6 +72,24 @@ import SectionHeader from '../ui/SectionHeader.astro';
 		color: var(--color-ink-soft);
 	}
 
+	.skills-strip ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+		margin: 1rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.skills-strip li {
+		border: 1px solid var(--color-line);
+		border-radius: 999px;
+		padding: 0.22rem 0.45rem;
+		color: var(--color-accent-strong);
+		font-size: 0.72rem;
+		font-weight: 850;
+	}
+
 	.skills-strip {
 		grid-column: 1 / -1;
 		display: grid;
@@ -81,7 +102,7 @@ import SectionHeader from '../ui/SectionHeader.astro';
 	}
 
 	.skills-strip div {
-		min-height: 8.5rem;
+		min-height: 12rem;
 		background: var(--color-paper-raised);
 		padding: 1.1rem;
 	}
