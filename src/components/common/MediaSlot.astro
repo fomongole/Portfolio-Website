@@ -9,15 +9,19 @@ interface Props {
 	label: string;
 	aspect?: string;
 	priority?: boolean;
+	kind?: 'web' | 'mobile' | 'brand' | 'system';
+	fit?: 'cover' | 'contain';
 }
 
-const { assetPath, alt, label, aspect = '16 / 10', priority = false } = Astro.props;
+const { assetPath, alt, label, aspect = '16 / 10', priority = false, kind = 'web', fit } = Astro.props;
 const image = getImageSlot(assetPath);
+const mediaFit = fit || (kind === 'mobile' ? 'contain' : 'cover');
+const placeholderLabel = assetPath ? assetPath.replace('/src/assets/images/projects/', '') : label;
 ---
 
 {
 	image ? (
-		<figure class="media-slot" style={`aspect-ratio: ${aspect}`}>
+		<figure class={`media-slot media-slot--${kind} media-slot--${mediaFit}`} style={`aspect-ratio: ${aspect}`}>
 			<Image
 				src={image}
 				alt={alt}
@@ -29,7 +33,9 @@ const image = getImageSlot(assetPath);
 			/>
 		</figure>
 	) : (
-		<PlaceholderFrame label={label} aspect={aspect} />
+		<div class={`media-placeholder media-placeholder--${kind}`} style={`aspect-ratio: ${aspect}`}>
+			<PlaceholderFrame label={placeholderLabel} aspect={aspect} />
+		</div>
 	)
 }
 
@@ -47,6 +53,47 @@ const image = getImageSlot(assetPath);
 		display: block;
 		width: 100%;
 		height: 100%;
+	}
+
+	.media-slot--cover :global(img) {
 		object-fit: cover;
+	}
+
+	.media-slot--contain :global(img) {
+		object-fit: contain;
+	}
+
+	.media-slot--mobile {
+		display: grid;
+		place-items: center;
+		border: 0;
+		background: transparent;
+		padding: 0;
+	}
+
+	.media-slot--mobile :global(img) {
+		width: 100%;
+		max-width: 100%;
+		height: 100%;
+		max-height: 100%;
+		object-fit: cover;
+		border: 1px solid color-mix(in srgb, var(--color-line), var(--color-ink) 12%);
+		border-radius: 1.1rem;
+		background: var(--color-paper);
+		box-shadow: 0 16px 38px rgb(var(--color-shadow) / 0.16);
+	}
+
+	.media-placeholder {
+		width: 100%;
+	}
+
+	.media-placeholder :global(.placeholder-frame) {
+		height: 100%;
+	}
+
+	.media-placeholder--mobile :global(.placeholder-frame) {
+		background:
+			linear-gradient(180deg, color-mix(in srgb, var(--color-ink), transparent 95%), transparent),
+			var(--color-paper-raised);
 	}
 </style>

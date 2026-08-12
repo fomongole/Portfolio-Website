@@ -1,6 +1,7 @@
 export type ProjectCategory = 'web' | 'mobile' | 'backend' | 'full-stack';
 export type ProjectOwnership = 'client' | 'employer' | 'team' | 'personal';
 export type ProjectType = 'production' | 'case-study' | 'prototype' | 'internal-tool';
+export type ProjectImageKind = 'web' | 'mobile' | 'brand' | 'system';
 
 export interface ProjectImage {
 	src: string;
@@ -8,6 +9,10 @@ export interface ProjectImage {
 	width: number;
 	height: number;
 	assetPath?: string;
+	kind?: ProjectImageKind;
+	group?: string;
+	aspect?: string;
+	caption?: string;
 }
 
 export interface ProjectLinks {

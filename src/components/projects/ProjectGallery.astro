@@ -1,0 +1,169 @@
+---
+import type { ProjectImage, ProjectImageKind } from '../../lib/types';
+import { getImageSlot } from '../../lib/imageSlots';
+import MediaSlot from '../common/MediaSlot.astro';
+
+interface Props {
+	images: ProjectImage[];
+	title: string;
+}
+
+const { images, title } = Astro.props;
+const availableImages = images.filter((image) => getImageSlot(image.assetPath));
+const groupLabels: Record<string, string> = {
+	web: 'Web platform',
+	mobile: 'Mobile app',
+	system: 'System notes',
+	brand: 'Brand / preview',
+};
+
+const groupedImages = availableImages.reduce(
+	(groups, image) => {
+		const key = image.group || image.kind || 'web';
+		groups[key] = [...(groups[key] || []), image];
+		return groups;
+	},
+	{} as Record<string, ProjectImage[]>,
+);
+
+const orderedGroups = Object.entries(groupedImages).sort(([a], [b]) => {
+	const order = ['web', 'mobile', 'system', 'brand'];
+	return order.indexOf(a) - order.indexOf(b);
+});
+
+const getKind = (image: ProjectImage): ProjectImageKind => image.kind || 'web';
+const getAspect = (image: ProjectImage) => image.aspect || (getKind(image) === 'mobile' ? '9 / 19.5' : '16 / 10');
+---
+
+{orderedGroups.length > 0 && (
+	<section class="project-gallery" aria-label={`${title} screenshots`}>
+		{orderedGroups.map(([group, groupImages]) => (
+			<div class={`gallery-group gallery-group--${group}`}>
+				<header>
+					<p class="eyebrow">{groupLabels[group] || group}</p>
+					<p>{groupImages.length} {groupImages.length === 1 ? 'image' : 'images'}</p>
+				</header>
+				<div class={`gallery-grid gallery-grid--${groupImages.some((image) => getKind(image) === 'mobile') ? 'mobile' : 'landscape'}`}>
+					{groupImages.map((image, index) => (
+						<figure class={`gallery-item gallery-item--${getKind(image)}`}>
+							<MediaSlot
+								assetPath={image.assetPath}
+								alt={image.alt}
+								label={image.caption || (getKind(image) === 'mobile' ? 'Mobile screenshot' : 'Web screenshot')}
+								aspect={getAspect(image)}
+								kind={getKind(image)}
+								priority={index === 0}
+							/>
+							{image.caption && <figcaption>{image.caption}</figcaption>}
+						</figure>
+					))}
+				</div>
+			</div>
+		))}
+	</section>
+)}
+
+<style>
+	.project-gallery {
+		display: grid;
+		gap: clamp(1.4rem, 4vw, 2.4rem);
+	}
+
+	.gallery-group {
+		display: grid;
+		gap: 0.9rem;
+	}
+
+	.gallery-group header {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.gallery-group header p {
+		margin: 0;
+	}
+
+	.gallery-group header p:not(.eyebrow) {
+		color: var(--color-ink-muted);
+		font-size: 0.82rem;
+		font-weight: 800;
+	}
+
+	.gallery-grid {
+		display: grid;
+		gap: clamp(0.85rem, 2vw, 1.1rem);
+	}
+
+	.gallery-grid--landscape {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.gallery-grid--landscape .gallery-item:first-child {
+		grid-column: 1 / -1;
+	}
+
+	.gallery-grid--mobile {
+		grid-template-columns: repeat(auto-fit, minmax(13rem, 17rem));
+		align-items: start;
+		justify-content: start;
+		justify-items: stretch;
+	}
+
+	.gallery-item {
+		display: grid;
+		gap: 0.55rem;
+		width: 100%;
+		margin: 0;
+	}
+
+	.gallery-item--mobile {
+		max-width: 17rem;
+	}
+
+	.gallery-item--mobile :global(.media-slot--mobile) {
+		border: 0;
+		background: transparent;
+		padding: 0;
+		box-shadow: none;
+	}
+
+	.gallery-item--mobile :global(.media-slot--mobile img) {
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		border-radius: 1.2rem;
+		object-fit: cover;
+	}
+
+	.gallery-item figcaption {
+		color: var(--color-ink-muted);
+		font-size: 0.84rem;
+	}
+
+	@media (max-width: 760px) {
+		.gallery-grid--landscape {
+			grid-template-columns: 1fr;
+		}
+
+		.gallery-grid--mobile {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			justify-content: stretch;
+		}
+
+		.gallery-item--mobile {
+			max-width: none;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.gallery-grid--mobile {
+			grid-template-columns: 1fr;
+		}
+
+		.gallery-item--mobile {
+			max-width: 12.5rem;
+		}
+	}
+</style>

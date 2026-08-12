@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../../lib/types';
+import { getImageSlot } from '../../lib/imageSlots';
 import MediaSlot from '../common/MediaSlot.astro';
 
 interface Props {
@@ -16,12 +17,22 @@ const links: Array<{ label: string; href: string }> = [
 ].filter((link): link is { label: string; href: string } => Boolean(link.href));
 
 const isPlaceholder = (href: string) => href.startsWith('[');
-const image = project.images[0];
+const existingWebImage = project.images.find((item) => item.kind === 'web' && getImageSlot(item.assetPath));
+const existingImage = project.images.find((item) => getImageSlot(item.assetPath));
+const image = existingWebImage || existingImage || project.images.find((item) => item.kind === 'web') || project.images[0];
+const imageKind = image?.kind || 'web';
 ---
 
 <article class={`project-card project-card--${variant}`}>
-	<div class="project-media">
-		<MediaSlot assetPath={image?.assetPath} alt={image?.alt || `${project.title} screenshot`} label="[PROJECT_SCREENSHOT]" aspect="16 / 10" />
+	<div class={`project-media project-media--${imageKind}`}>
+		<MediaSlot
+			assetPath={image?.assetPath}
+			alt={image?.alt || `${project.title} screenshot`}
+			label={imageKind === 'mobile' ? '[MOBILE_SCREENSHOT]' : '[WEB_SCREENSHOT]'}
+			aspect="16 / 10"
+			kind={imageKind}
+			fit={imageKind === 'mobile' ? 'contain' : 'cover'}
+		/>
 	</div>
 	<div class="project-body">
 		<div class="project-kicker">
@@ -82,6 +93,30 @@ const image = project.images[0];
 
 	.project-media {
 		min-width: 0;
+	}
+
+	.project-media--mobile {
+		display: grid;
+		place-items: center;
+		padding: clamp(0.9rem, 2vw, 1.2rem);
+		background:
+			linear-gradient(180deg, color-mix(in srgb, var(--color-ink), transparent 96%), transparent),
+			var(--color-paper-raised);
+	}
+
+	.project-media--mobile :global(.media-slot) {
+		width: 100%;
+		max-width: none;
+		border: 0;
+		background: transparent;
+	}
+
+	.project-media--mobile :global(.media-slot img) {
+		width: auto;
+		max-width: min(42%, 13rem);
+		height: 100%;
+		object-fit: contain;
+		border-radius: 1rem;
 	}
 
 	.project-card--featured .project-media :global(.placeholder-frame) {

@@ -31,22 +31,42 @@ The site now includes the design system, architecture, site shell, homepage, Abo
 
 ## Image Slots
 
-Place real images in `src/assets/images/` using these exact paths. The `MediaSlot` component will automatically use Astro's image pipeline for local optimization and responsive `srcset` output when the files exist; otherwise the intentional placeholders remain visible.
+Place real images in `src/assets/images/`. `MediaSlot` and `ProjectGallery` automatically use Astro's image pipeline for local optimization and responsive `srcset` output when files exist; otherwise intentional placeholders remain visible.
+
+Profile images:
 
 | Image | Path | Suggested Shape |
 | :---- | :--- | :-------------- |
 | Fred profile portrait | `src/assets/images/profile/fred-omongole-profile.jpg` | 4:5 portrait, at least 1200x1500 |
 | Fred workspace/context | `src/assets/images/profile/fred-workspace.jpg` | 5:4, at least 1500x1200 |
-| Rentora HouseLink | `src/assets/images/projects/rentora-houselink.jpg` | 16:10 or 16:9, at least 1600px wide |
-| Bllar / Bllar Manager | `src/assets/images/projects/bllar-bllar-manager.jpg` | 16:10 or 16:9, at least 1600px wide |
-| Afrodoctor | `src/assets/images/projects/afrodoctor.jpg` | 16:10 or 16:9, at least 1600px wide |
-| Educan | `src/assets/images/projects/educan.jpg` | 16:10 or 16:9, at least 1600px wide |
-| Boomry | `src/assets/images/projects/boomry.jpg` | 16:10 or 16:9, at least 1600px wide |
-| WhatsApp Status Saver | `src/assets/images/projects/whatsapp-status-saver.jpg` | Android screenshot composition, at least 1200px wide |
-| Screen Recorder | `src/assets/images/projects/screen-recorder.jpg` | Android screenshot composition, at least 1200px wide |
 | Social preview replacement | `src/assets/images/social/engineer-fred-og.jpg` | 1200x630 |
 
-Use `.jpg`, `.png`, `.webp`, or `.avif` for local optimized image slots. The current data points to `.jpg`; if you choose another extension, update the relevant `assetPath` in `src/data/projects.ts` or component usage.
+Project galleries expect every product to have both web and mobile surfaces. The Work cards use the primary landscape image. Detail pages render four web screenshots in wide frames and four mobile screenshots in compact portrait frames without cropping.
+
+| Project | Current primary fallback | Additional gallery folder |
+| :------ | :----------------------- | :------------------------ |
+| Rentora HouseLink | `src/assets/images/projects/rentora-houselink.jpg` | `src/assets/images/projects/rentora-houselink/` |
+| Bllar / Bllar Manager | `src/assets/images/projects/bllar-bllar-manager.jpg` | `src/assets/images/projects/bllar-bllar-manager/` |
+| Afrodoctor | `src/assets/images/projects/afrodoctor.jpg` | `src/assets/images/projects/afrodoctor/` |
+| Educan | `src/assets/images/projects/educan.jpg` | `src/assets/images/projects/educan/` |
+| Boomry | `src/assets/images/projects/boomry.jpg` | `src/assets/images/projects/boomry/` |
+| WhatsApp Status Saver | `src/assets/images/projects/whatsapp-status-saver.jpg` | `src/assets/images/projects/whatsapp-status-saver/` |
+| Screen Recorder | `src/assets/images/projects/screen-recorder.jpg` | `src/assets/images/projects/screen-recorder/` |
+
+Required project screenshot naming:
+
+```text
+src/assets/images/projects/{project-slug}.jpg
+src/assets/images/projects/{project-slug}/web-02.jpg
+src/assets/images/projects/{project-slug}/web-03.jpg
+src/assets/images/projects/{project-slug}/web-04.jpg
+src/assets/images/projects/{project-slug}/mobile-01.jpg
+src/assets/images/projects/{project-slug}/mobile-02.jpg
+src/assets/images/projects/{project-slug}/mobile-03.jpg
+src/assets/images/projects/{project-slug}/mobile-04.jpg
+```
+
+Use `.jpg`, `.png`, `.webp`, or `.avif`. The current data points to `.jpg`; if you choose another extension, update the relevant `assetPath` in `src/data/projects.ts`. Astro optimizes these automatically at build time through `astro:assets`, so you do not need a separate manual compression step before adding them.
 
 ## Deployment
 

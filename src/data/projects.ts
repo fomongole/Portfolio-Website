@@ -7,6 +7,30 @@ export const placeholderProjectImage = {
 	height: 1000,
 };
 
+const projectImage = (
+	assetPath: string,
+	alt: string,
+	kind: 'web' | 'mobile' | 'system' | 'brand',
+	caption: string,
+) => ({
+	...placeholderProjectImage,
+	assetPath,
+	alt,
+	kind,
+	group: kind,
+	aspect: kind === 'mobile' ? '9 / 19.5' : '16 / 10',
+	caption,
+});
+
+const primaryWebImage = (slug: string, alt: string, caption = 'Web product overview') =>
+	projectImage(`/src/assets/images/projects/${slug}.jpg`, alt, 'web', caption);
+
+const webImage = (slug: string, file: string, alt: string, caption: string) =>
+	projectImage(`/src/assets/images/projects/${slug}/${file}`, alt, 'web', caption);
+
+const mobileImage = (slug: string, file: string, alt: string, caption: string) =>
+	projectImage(`/src/assets/images/projects/${slug}/${file}`, alt, 'mobile', caption);
+
 export const projects: Project[] = [
 	{
 		title: 'Rentora HouseLink',
@@ -20,7 +44,16 @@ export const projects: Project[] = [
 		platform: ['Web', 'Mobile'],
 		technologies: ['NestJS', 'Next.js', 'Flutter', 'Backblaze B2', 'Cloudflare CDN', 'Hetzner VPS'],
 		role: 'Tech Lead',
-		images: [{ ...placeholderProjectImage, alt: 'Rentora HouseLink product screenshot', assetPath: '/src/assets/images/projects/rentora-houselink.jpg' }],
+		images: [
+			primaryWebImage('rentora-houselink', 'Rentora HouseLink web explore properties screen'),
+			webImage('rentora-houselink', 'web-02.jpg', 'Rentora HouseLink web admin dashboard', 'Admin dashboard'),
+			webImage('rentora-houselink', 'web-03.jpg', 'Rentora HouseLink web bookings workflow', 'Bookings workflow'),
+			webImage('rentora-houselink', 'web-04.jpg', 'Rentora HouseLink web media management', 'Media management'),
+			mobileImage('rentora-houselink', 'mobile-01.jpg', 'Rentora HouseLink mobile home screen', 'Mobile home'),
+			mobileImage('rentora-houselink', 'mobile-02.jpg', 'Rentora HouseLink mobile property detail screen', 'Property detail'),
+			mobileImage('rentora-houselink', 'mobile-03.jpg', 'Rentora HouseLink mobile booking screen', 'Booking flow'),
+			mobileImage('rentora-houselink', 'mobile-04.jpg', 'Rentora HouseLink mobile saved properties screen', 'Saved properties'),
+		],
 		links: {
 			live: 'https://rentorahouselink.com',
 		},
@@ -60,12 +93,19 @@ export const projects: Project[] = [
 		category: 'mobile',
 		categoryLabel: 'Mobile',
 		platform: ['Android', 'iOS'],
-		technologies: ['Flutter', '[PLAY_STORE_URL]', '[APP_STORE_URL]'],
+		technologies: ['Flutter', 'iOS release workflow', 'Android release workflow'],
 		role: 'Mobile developer',
-		images: [{ ...placeholderProjectImage, alt: 'Bllar and Bllar Manager app screenshots', assetPath: '/src/assets/images/projects/bllar-bllar-manager.jpg' }],
+		images: [
+			primaryWebImage('bllar-bllar-manager', 'Bllar web product surface screenshot'),
+			webImage('bllar-bllar-manager', 'web-02.jpg', 'Bllar web listing discovery screen', 'Listing discovery'),
+			webImage('bllar-bllar-manager', 'web-03.jpg', 'Bllar manager web dashboard screen', 'Manager dashboard'),
+			webImage('bllar-bllar-manager', 'web-04.jpg', 'Bllar web account workflow screen', 'Account workflow'),
+			mobileImage('bllar-bllar-manager', 'mobile-01.jpg', 'Bllar tenant app home screen', 'Tenant home'),
+			mobileImage('bllar-bllar-manager', 'mobile-02.jpg', 'Bllar tenant listing screen', 'Tenant listing'),
+			mobileImage('bllar-bllar-manager', 'mobile-03.jpg', 'Bllar Manager landlord dashboard screen', 'Manager dashboard'),
+			mobileImage('bllar-bllar-manager', 'mobile-04.jpg', 'Bllar Manager property management screen', 'Manager property'),
+		],
 		links: {
-			playStore: '[PLAY_STORE_URL]',
-			appStore: '[APP_STORE_URL]',
 			live: 'https://bllar.com',
 		},
 		ownership: 'client',
@@ -92,11 +132,19 @@ export const projects: Project[] = [
 		category: 'full-stack',
 		categoryLabel: 'Full-stack · Web + mobile',
 		platform: ['Web', 'Mobile'],
-		technologies: ['Flutter', '[PLAY_STORE_URL]'],
+		technologies: ['Flutter', 'Appointment booking', 'Facility workflows'],
 		role: 'Full Stack Developer',
-		images: [{ ...placeholderProjectImage, alt: 'Afrodoctor product screenshot', assetPath: '/src/assets/images/projects/afrodoctor.jpg' }],
+		images: [
+			primaryWebImage('afrodoctor', 'Afrodoctor web pricing and plans screen'),
+			webImage('afrodoctor', 'web-02.jpg', 'Afrodoctor web facility dashboard screenshot', 'Facility dashboard'),
+			webImage('afrodoctor', 'web-03.jpg', 'Afrodoctor web referrals dashboard screenshot', 'Referrals dashboard'),
+			webImage('afrodoctor', 'web-04.jpg', 'Afrodoctor web appointment scheduling screen', 'Appointment scheduling'),
+			mobileImage('afrodoctor', 'mobile-01.jpg', 'Afrodoctor mobile app home screen', 'Mobile home'),
+			mobileImage('afrodoctor', 'mobile-02.jpg', 'Afrodoctor mobile booking screen', 'Appointment booking'),
+			mobileImage('afrodoctor', 'mobile-03.jpg', 'Afrodoctor mobile health worker profile screen', 'Health worker profile'),
+			mobileImage('afrodoctor', 'mobile-04.jpg', 'Afrodoctor mobile referrals screen', 'Referrals'),
+		],
 		links: {
-			playStore: '[PLAY_STORE_URL]',
 			live: 'https://afrodoctor.org',
 		},
 		ownership: 'employer',
@@ -130,7 +178,16 @@ export const projects: Project[] = [
 		platform: ['Android', 'iOS'],
 		technologies: ['Flutter', 'Google Play', 'App Store'],
 		role: 'Bug fixes and Play Store release prep',
-		images: [{ ...placeholderProjectImage, alt: 'Educan app screenshot', assetPath: '/src/assets/images/projects/educan.jpg' }],
+		images: [
+			primaryWebImage('educan', 'Educan web learning platform screenshot'),
+			webImage('educan', 'web-02.jpg', 'Educan web lessons dashboard', 'Lessons dashboard'),
+			webImage('educan', 'web-03.jpg', 'Educan web practice tests screen', 'Practice tests'),
+			webImage('educan', 'web-04.jpg', 'Educan web bookshop screen', 'Bookshop'),
+			mobileImage('educan', 'mobile-01.jpg', 'Educan mobile app home screen', 'Mobile home'),
+			mobileImage('educan', 'mobile-02.jpg', 'Educan lessons screen', 'Lessons'),
+			mobileImage('educan', 'mobile-03.jpg', 'Educan practice tests screen', 'Practice tests'),
+			mobileImage('educan', 'mobile-04.jpg', 'Educan career guidance screen', 'Career guidance'),
+		],
 		links: {
 			live: 'https://educanug.org',
 		},
@@ -163,9 +220,18 @@ export const projects: Project[] = [
 		category: 'full-stack',
 		categoryLabel: 'Web + mobile',
 		platform: ['Web', 'Mobile'],
-		technologies: ['Flutter', '[CONFIRM_TO_ADD]'],
+		technologies: ['Flutter', 'Responsive web UI', 'Search flows', 'Live chat widget'],
 		role: 'Frontend developer on the web platform; also one of the developers on the Flutter mobile app version.',
-		images: [{ ...placeholderProjectImage, alt: 'Boomry product screenshot', assetPath: '/src/assets/images/projects/boomry.jpg' }],
+		images: [
+			primaryWebImage('boomry', 'Boomry web product screenshot'),
+			webImage('boomry', 'web-02.jpg', 'Boomry web search screen', 'Music search'),
+			webImage('boomry', 'web-03.jpg', 'Boomry web creator account screen', 'Creator account'),
+			webImage('boomry', 'web-04.jpg', 'Boomry web playlist screen', 'Playlist view'),
+			mobileImage('boomry', 'mobile-01.jpg', 'Boomry mobile app home screen', 'Mobile home'),
+			mobileImage('boomry', 'mobile-02.jpg', 'Boomry mobile music player screen', 'Mobile player'),
+			mobileImage('boomry', 'mobile-03.jpg', 'Boomry mobile search screen', 'Mobile search'),
+			mobileImage('boomry', 'mobile-04.jpg', 'Boomry mobile creator profile screen', 'Creator profile'),
+		],
 		links: {
 			live: 'https://boomry.com',
 		},
@@ -173,7 +239,7 @@ export const projects: Project[] = [
 		ownershipLabel: 'Team project',
 		featured: false,
 		type: 'production',
-		notes: ['Built alongside other developers.', 'Web frontend stack: [CONFIRM_TO_ADD]'],
+		notes: ['Built alongside other developers across the web platform and Flutter mobile app.'],
 		problem:
 			'Music platforms need search, account flows, and support tools that feel coherent for creators, promoters, and listeners.',
 		solution:
@@ -197,9 +263,14 @@ export const projects: Project[] = [
 		platform: ['Android'],
 		technologies: ['Kotlin'],
 		role: 'Personal product engineering',
-		images: [{ ...placeholderProjectImage, alt: 'WhatsApp Status Saver app screenshot', assetPath: '/src/assets/images/projects/whatsapp-status-saver.jpg' }],
+		images: [
+			mobileImage('whatsapp-status-saver', 'mobile-01.jpg', 'WhatsApp Status Saver status list screen', 'Status list'),
+			mobileImage('whatsapp-status-saver', 'mobile-02.jpg', 'WhatsApp Status Saver preview screen', 'Status preview'),
+			mobileImage('whatsapp-status-saver', 'mobile-03.jpg', 'WhatsApp Status Saver saved statuses screen', 'Saved statuses'),
+			mobileImage('whatsapp-status-saver', 'mobile-04.jpg', 'WhatsApp Status Saver settings screen', 'Settings'),
+		],
 		links: {
-			live: 'https://github.com/EngFred/WA_Status_Saver'
+			github: 'https://github.com/EngFred/WA_Status_Saver'
 		},
 		ownership: 'personal',
 		ownershipLabel: 'Personal project',
@@ -214,20 +285,33 @@ export const projects: Project[] = [
 	{
 		title: 'Screen Recorder',
 		slug: 'screen-recorder',
-		description: '[CONFIRM_TO_ADD — no description on file yet]',
-		intro: '[CONFIRM_TO_ADD — no description on file yet]',
+		description:
+			'A native Android screen recording utility with recording controls, audio settings, video quality options, and a recordings library.',
+		intro:
+			'Screen Recorder is a focused Android utility for capturing device screen recordings with configurable audio and video quality settings.',
 		category: 'mobile',
 		categoryLabel: 'Mobile · Personal, unpublished',
 		platform: ['Android'],
-		technologies: ['[CONFIRM_TO_ADD]'],
+		technologies: ['Kotlin', 'Android MediaProjection', 'Foreground service', 'MediaStore'],
 		role: 'Personal product engineering',
-		images: [{ ...placeholderProjectImage, alt: 'Screen Recorder app screenshot', assetPath: '/src/assets/images/projects/screen-recorder.jpg' }],
-		links: {},
+		images: [
+			mobileImage('screen-recorder', 'mobile-01.jpg', 'Screen Recorder mobile home screen', 'Home screen'),
+			mobileImage('screen-recorder', 'mobile-02.jpg', 'Screen Recorder recording screen', 'Recording screen'),
+			mobileImage('screen-recorder', 'mobile-03.jpg', 'Screen Recorder recordings library screen', 'Recordings library'),
+			mobileImage('screen-recorder', 'mobile-04.jpg', 'Screen Recorder settings screen', 'Settings'),
+		],
+		links: {
+			github: 'https://github.com/EngFred/Screen_Recorder'
+		},
 		ownership: 'personal',
 		ownershipLabel: 'Personal project',
 		featured: false,
 		type: 'prototype',
-		problem: '[CONFIRM_TO_ADD — no description on file yet]',
+		problem:
+			'Users need a simple recorder that exposes practical controls like audio capture and video quality without burying the core recording action.',
+		solution:
+			'Fred built a native Android recorder surface around clear recording settings, a direct start action, and a saved-recordings workflow.',
+		features: ['Screen recording', 'Audio source settings', 'Bitrate and quality controls', 'Recordings library'],
 	},
 ];
 

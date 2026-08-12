@@ -1,7 +1,7 @@
 ---
 import type { Project } from '../../lib/types';
 import { getRelatedProjects } from '../../data/projects';
-import MediaSlot from '../common/MediaSlot.astro';
+import ProjectGallery from './ProjectGallery.astro';
 import ProjectCard from './ProjectCard.astro';
 
 interface Props {
@@ -10,13 +10,12 @@ interface Props {
 
 const { project } = Astro.props;
 const relatedProjects = getRelatedProjects(project);
-const image = project.images[0];
-const links = [
+const links: Array<{ label: string; href: string }> = [
 	{ label: 'Live product', href: project.links.live },
 	{ label: 'GitHub repository', href: project.links.github },
 	{ label: 'Play Store', href: project.links.playStore },
 	{ label: 'App Store', href: project.links.appStore },
-].filter((link) => link.href && !link.href.startsWith('['));
+].filter((link): link is { label: string; href: string } => Boolean(link.href && !link.href.startsWith('[')));
 ---
 
 <article class="detail-page">
@@ -46,7 +45,7 @@ const links = [
 			</aside>
 		</header>
 
-		<MediaSlot assetPath={image?.assetPath} alt={image?.alt || `${project.title} screenshot`} label="[PROJECT_SCREENSHOT]" aspect="16 / 9" priority />
+		<ProjectGallery images={project.images} title={project.title} />
 
 		<section class="content-grid">
 			<div class="narrative">
