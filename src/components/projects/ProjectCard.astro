@@ -29,7 +29,7 @@ const imageKind = image?.kind || 'web';
 			assetPath={image?.assetPath}
 			alt={image?.alt || `${project.title} screenshot`}
 			label={imageKind === 'mobile' ? '[MOBILE_SCREENSHOT]' : '[WEB_SCREENSHOT]'}
-			aspect="16 / 10"
+			aspect={imageKind === 'mobile' ? '4 / 3' : '16 / 10'}
 			kind={imageKind}
 			fit={imageKind === 'mobile' ? 'contain' : 'cover'}
 		/>
@@ -113,10 +113,10 @@ const imageKind = image?.kind || 'web';
 
 	.project-media--mobile :global(.media-slot img) {
 		width: auto;
-		max-width: min(42%, 13rem);
+		max-width: min(65%, 15.5rem);
 		height: 100%;
 		object-fit: contain;
-		border-radius: 1rem;
+		border-radius: 1.1rem;
 	}
 
 	.project-card--featured .project-media :global(.placeholder-frame) {
